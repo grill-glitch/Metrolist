@@ -893,4 +893,8 @@
     <string name="time_transfer_listen_time_label">Listen time: </string>
     <string name="time_transfer_convert">Convert</string>
     <string name="song_dropdown_more_results">Keep typing to narrow results (%d more)</string>
+
+    <!-- NetEase Cloud Music -->
+    <string name="netease_cloud_music">NetEase Cloud Music</string>
+    <string name="netease_lyrics_provider_description">Get lyrics from NetEase Cloud Music</string>
 </resources>

@@ -12,6 +12,7 @@ object LyricsProviderRegistry {
         "LrcLib" to LrcLibLyricsProvider,
         "KuGou" to KuGouLyricsProvider,
         "LyricsPlus" to LyricsPlusProvider,
+        "NeteaseCloudMusic" to NeteaseCloudMusicProvider,
         "YouTubeSubtitle" to YouTubeSubtitleLyricsProvider,
         "YouTube" to YouTubeLyricsProvider,
     )
@@ -27,7 +28,9 @@ object LyricsProviderRegistry {
         if (orderString.isBlank()) {
             return getDefaultProviderOrder()
         }
-        return orderString.split(",").map { it.trim() }.filter { it in providerNames }
+        val savedOrder = orderString.split(",").map { it.trim() }.filter { it in providerNames }
+        val missingProviders = providerNames.filter { it !in savedOrder }
+        return savedOrder + missingProviders
     }
 
     fun serializeProviderOrder(providers: List<String>): String {
@@ -40,6 +43,7 @@ object LyricsProviderRegistry {
         "LrcLib",
         "KuGou",
         "LyricsPlus",
+        "NeteaseCloudMusic",
         "YouTubeSubtitle",
         "YouTube",
     )

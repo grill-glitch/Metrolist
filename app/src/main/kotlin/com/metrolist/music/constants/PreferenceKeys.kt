@@ -89,6 +89,7 @@ val EnableLrcLibKey = booleanPreferencesKey("enableLrclib")
 val EnableBetterLyricsKey = booleanPreferencesKey("enableBetterLyrics")
 val EnableSimpMusicKey = booleanPreferencesKey("enableSimpMusic")
 val EnableLyricsPlus = booleanPreferencesKey("enableLyricsPlus")
+val EnableNeteaseCloudMusicKey = booleanPreferencesKey("enableNeteaseCloudMusic")
 val HideExplicitKey = booleanPreferencesKey("hideExplicit")
 val HideVideoSongsKey = booleanPreferencesKey("hideVideoSongs")
 val HideYoutubeShortsKey = booleanPreferencesKey("hideYoutubeShorts")
@@ -404,6 +405,7 @@ enum class PreferredLyricsProvider {
     KUGOU,
     BETTER_LYRICS,
     SIMPMUSIC,
+    NETEASE_CLOUD_MUSIC,
 }
 
 enum class PlayerButtonsStyle {

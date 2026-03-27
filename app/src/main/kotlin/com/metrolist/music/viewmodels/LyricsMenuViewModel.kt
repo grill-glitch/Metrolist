@@ -99,7 +99,25 @@ constructor(
                 runBlocking {
                     lyricsHelper.getLyrics(mediaMetadata)
                 }
-            upsert(LyricsEntity(mediaMetadata.id, lyricsWithProvider.lyrics, lyricsWithProvider.provider))
+            // 解析组合的歌词字符串，分离主歌词和翻译
+            val combined = lyricsWithProvider.lyrics
+            val separator = "\n\n[translate]\n"
+            val (mainLyrics, translated) = if (combined.contains(separator)) {
+                val parts = combined.split(separator, limit = 2)
+                Pair(parts[0], parts.getOrElse(1) { "" })
+            } else {
+                Pair(combined, "")
+            }
+            upsert(
+                LyricsEntity(
+                    id = mediaMetadata.id,
+                    lyrics = mainLyrics,
+                    provider = lyricsWithProvider.provider,
+                    translatedLyrics = translated,
+                    translationLanguage = if (translated.isNotBlank()) "zh-CN" else "",
+                    translationMode = "netease_auto"
+                )
+            )
         }
     }
 }

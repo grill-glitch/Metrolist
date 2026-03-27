@@ -16,7 +16,6 @@ import com.metrolist.music.models.MediaMetadata
 import com.metrolist.music.utils.NetworkConnectivityObserver
 import com.metrolist.music.utils.dataStore
 import com.metrolist.music.utils.reportException
-import com.metrolist.music.lyrics.NeteaseCloudMusicProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -26,13 +25,6 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -49,7 +41,6 @@ constructor(
             LrcLibLyricsProvider,
             KuGouLyricsProvider,
             LyricsPlusProvider,
-            NeteaseCloudMusicProvider,
             YouTubeSubtitleLyricsProvider,
             YouTubeLyricsProvider
         )
@@ -72,7 +63,6 @@ constructor(
                             SimpMusicLyricsProvider,
                             KuGouLyricsProvider,
                             LyricsPlusProvider,
-                            NeteaseCloudMusicProvider,
                             YouTubeSubtitleLyricsProvider,
                             YouTubeLyricsProvider
                         )
@@ -82,7 +72,6 @@ constructor(
                             SimpMusicLyricsProvider,
                             LrcLibLyricsProvider,
                             LyricsPlusProvider,
-                            NeteaseCloudMusicProvider,
                             YouTubeSubtitleLyricsProvider,
                             YouTubeLyricsProvider
                         )
@@ -92,24 +81,12 @@ constructor(
                             LrcLibLyricsProvider,
                             KuGouLyricsProvider,
                             LyricsPlusProvider,
-                            NeteaseCloudMusicProvider,
                             YouTubeSubtitleLyricsProvider,
                             YouTubeLyricsProvider
                         )
                         PreferredLyricsProvider.SIMPMUSIC -> listOf(
                             SimpMusicLyricsProvider,
                             BetterLyricsProvider,
-                            LrcLibLyricsProvider,
-                            KuGouLyricsProvider,
-                            LyricsPlusProvider,
-                            NeteaseCloudMusicProvider,
-                            YouTubeSubtitleLyricsProvider,
-                            YouTubeLyricsProvider
-                        )
-                        PreferredLyricsProvider.NETEASE_CLOUD_MUSIC -> listOf(
-                            NeteaseCloudMusicProvider,
-                            BetterLyricsProvider,
-                            SimpMusicLyricsProvider,
                             LrcLibLyricsProvider,
                             KuGouLyricsProvider,
                             LyricsPlusProvider,

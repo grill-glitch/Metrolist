@@ -61,7 +61,6 @@ import com.metrolist.music.constants.CountryCodeToName
 import com.metrolist.music.constants.EnableBetterLyricsKey
 import com.metrolist.music.constants.EnableKugouKey
 import com.metrolist.music.constants.EnableLrcLibKey
-import com.metrolist.music.constants.EnableNeteaseCloudMusicKey
 import com.metrolist.music.constants.EnableSimpMusicKey
 import com.metrolist.music.constants.EnableLyricsPlus
 import com.metrolist.music.constants.HideExplicitKey
@@ -122,7 +121,6 @@ fun ContentSettings(
     val (enableBetterLyrics, onEnableBetterLyricsChange) = rememberPreference(key = EnableBetterLyricsKey, defaultValue = true)
     val (enableSimpMusic, onEnableSimpMusicChange) = rememberPreference(key = EnableSimpMusicKey, defaultValue = true)
     val (enableLyricsPlus, onEnableLyricsPlusChange) = rememberPreference(key = EnableLyricsPlus, defaultValue = false)
-    val (enableNeteaseCloudMusic, onEnableNeteaseCloudMusicChange) = rememberPreference(key = EnableNeteaseCloudMusicKey, defaultValue = false)
     val (lyricsProviderOrder, onLyricsProviderOrderChange) = rememberPreference(
         key = LyricsProviderOrderKey,
         defaultValue = LyricsProviderRegistry.serializeProviderOrder(LyricsProviderRegistry.getDefaultProviderOrder())
@@ -142,7 +140,6 @@ fun ContentSettings(
             "LrcLib" to "LrcLib",
             "KuGou" to "KuGou",
             "LyricsPlus" to "LyricsPlus",
-            "NeteaseCloudMusic" to stringResource(R.string.netease_cloud_music),
             "YouTubeSubtitle" to "YouTube Subtitles",
             "YouTube" to "YouTube",
         )
@@ -490,35 +487,6 @@ fun ContentSettings(
                             }
                         )
                     }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Column(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(stringResource(R.string.netease_cloud_music))
-                            Text(
-                                text = stringResource(R.string.netease_lyrics_provider_description),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                        Switch(
-                            checked = enableNeteaseCloudMusic,
-                            onCheckedChange = onEnableNeteaseCloudMusicChange,
-                            thumbContent = {
-                                Icon(
-                                    painter = painterResource(
-                                        id = if (enableNeteaseCloudMusic) R.drawable.check else R.drawable.close
-                                    ),
-                                    contentDescription = null,
-                                    modifier = Modifier.size(SwitchDefaults.IconSize)
-                                )
-                            }
-                        )
-                    }
                     Column(modifier = Modifier.padding(2.dp)) {
                         Text(
                             text = stringResource(R.string.youtube_music_lyrics_note),
@@ -611,12 +579,11 @@ fun ContentSettings(
             "BetterLyrics".takeIf { enableBetterLyrics },
             "SimpMusic".takeIf { enableSimpMusic },
             "LyricsPlus".takeIf { enableLyricsPlus },
-            "NeteaseCloudMusic".takeIf { enableNeteaseCloudMusic },
         ).filterNotNull().toSet()
         val lyricsIcon = painterResource(R.drawable.lyrics)
         val draggableItems = remember { mutableStateListOf<DraggableLyricsProviderItem>() }
 
-        LaunchedEffect(currentOrder, enableLrclib, enableKugou, enableBetterLyrics, enableSimpMusic, enableLyricsPlus, enableNeteaseCloudMusic) {
+        LaunchedEffect(currentOrder, enableLrclib, enableKugou, enableBetterLyrics, enableSimpMusic, enableLyricsPlus) {
             val orderedEnabledProviders = currentOrder.filter { it in enabledProviders }
             draggableItems.clear()
             draggableItems.addAll(

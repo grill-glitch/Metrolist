@@ -30,7 +30,6 @@ import com.metrolist.music.constants.*
 import com.metrolist.music.di.ApplicationScope
 import com.metrolist.music.extensions.toEnum
 import com.metrolist.music.extensions.toInetSocketAddress
-import com.metrolist.music.lyrics.LyricsProviderRegistry
 import com.metrolist.music.utils.CrashHandler
 import com.metrolist.music.utils.cipher.CipherDeobfuscator
 import com.metrolist.music.utils.dataStore
@@ -69,9 +68,7 @@ class App :
         // Initialize cipher deobfuscator for WEB_REMIX streaming
         CipherDeobfuscator.initialize(this)
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
+        Timber.plant(Timber.DebugTree())
 
         // تهيئة إعدادات التطبيق عند الإقلاع
         applicationScope.launch {

@@ -12,7 +12,6 @@ object LyricsProviderRegistry {
         "LrcLib" to LrcLibLyricsProvider,
         "KuGou" to KuGouLyricsProvider,
         "LyricsPlus" to LyricsPlusProvider,
-        "NeteaseCloudMusic" to NeteaseCloudMusicProvider,
         "YouTubeSubtitle" to YouTubeSubtitleLyricsProvider,
         "YouTube" to YouTubeLyricsProvider,
     )
@@ -41,7 +40,6 @@ object LyricsProviderRegistry {
         "LrcLib",
         "KuGou",
         "LyricsPlus",
-        "NeteaseCloudMusic",
         "YouTubeSubtitle",
         "YouTube",
     )

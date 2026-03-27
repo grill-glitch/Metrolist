@@ -272,7 +272,6 @@ dependencies {
     implementation(project(":betterlyrics"))
     implementation(project(":simpmusic"))
     implementation(project(":shazamkit"))
-    implementation(project(":netease"))
 
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)

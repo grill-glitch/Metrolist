@@ -115,7 +115,7 @@ constructor(
                     provider = lyricsWithProvider.provider,
                     translatedLyrics = translated,
                     translationLanguage = if (translated.isNotBlank()) "zh-CN" else "",
-                    translationMode = "netease_auto"
+                    translationMode = if (translated.isNotBlank()) "netease_auto" else ""
                 )
             )
         }
